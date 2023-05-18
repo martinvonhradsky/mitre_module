@@ -17,6 +17,7 @@ return [
 ```
 
 ## install
+run this in root directory
 ```
 docker compose up --build
 ```
