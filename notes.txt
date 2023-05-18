@@ -1,0 +1,27 @@
+Frontend        port: 8085
+Backend         port: 8090
+Secmon server   port: 8080
+
+
+# run this to fix ansible on server
+add-apt-repository -r ppa:ansible/ansible
+
+
+### Run docker interactively
+docker run -v <url> -p 8080:80 app
+docker run -v C:\Users\Test\Documents\Diplomovka\:/var/www/html -p 8080:80 app
+
+
+#################
+centos php-server cmd library installation
+yum -y install ifconfig openssh-server openssh-clients
+
+#################
+run ansible test - list OS information
+ansible-playbook execute_test.yaml --extra-vars '{"test":"T1082-3"}'
+
+ansible-playbook save_custom_test.yaml --extra-vars '{"test_id":"T42069", "file_name":"1", }'
+ls -la customs/T42069/ | wc -l -3
+
+
+./custom_test.sh -i T420 -u https://raw.githubusercontent.com/ansible/ansible/stable-2.9/examples/ansible.cfg -n 1
