@@ -157,6 +157,21 @@ export default {
           this.notificationClass = "bg-red-500 text-white";
         });
     },
+    pollExecutionOutput() {
+      const intervalId = setInterval(() => {
+        this.$axios
+          .get("api.php?action=result")
+          .then((response) => {
+            this.setupOutput = response.data.output;
+            if (response.data.end) {
+              clearInterval(intervalId); // Stop the interval when response.data.end is true
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, 2000);
+    },
     runSetup() {
       this.isLoading = true;
       const apiUrl = `run-ansible.php?action=setupTarget&ip=${this.targetIp}&user=${this.sudoUser}&pass=${this.password}`;
@@ -167,6 +182,7 @@ export default {
           this.setupOutput = response.data;
           this.notificationMessage = "Setup run successfully.";
           this.notificationClass = "bg-green-500 text-white";
+          this.pollExecutionOutput(); // Call the pollExecutionOutput method here
         })
         .catch((error) => {
           console.log(error);
